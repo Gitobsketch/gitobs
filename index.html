@@ -3,170 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitObs - Digital Fantasy Portal</title>
+    <title>GITOBS - Digital Fantasy & Art</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #0b0f19;
-            color: #e2e8f0;
+            background-color: #080a0f;
+            color: #d1d5db;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(30, 41, 59, 0.5) 0%, transparent 70%),
+                radial-gradient(circle at 80% 80%, rgba(217, 119, 6, 0.05) 0%, transparent 50%);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #f3f4f6;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-symbol {
+            color: #d97706;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #f3f4f6;
+        }
+
+        .hero {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1000px;
-            width: 100%;
-            margin-top: 40px;
-        }
-
-        .header-card {
-            background: linear-gradient(135deg, #161e2e 0%, #101726 100%);
-            border: 2px solid #3b82f6;
-            border-radius: 16px;
-            padding: 40px 20px;
             text-align: center;
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.2);
+            padding: 100px 20px 60px;
             position: relative;
-            overflow: hidden;
+        }
+
+        .hero-tag {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #d97706;
+            margin-bottom: 20px;
+            border: 1px solid rgba(217, 119, 6, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            background: rgba(217, 119, 6, 0.05);
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
+            letter-spacing: 12px;
+            color: #f8fafc;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-subtitle {
+            max-width: 550px;
+            font-size: 0.95rem;
+            color: #64748b;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
             margin-bottom: 40px;
         }
 
-        .header-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+        .divider {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(217, 119, 6, 0.5), transparent);
+            margin-bottom: 80px;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(90deg, #60a5fa, #a78bfa, #f472b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            letter-spacing: 4px;
+            text-align: center;
+            color: #e2e8f0;
+            margin-bottom: 50px;
         }
 
-        p.subtitle {
-            color: #94a3b8;
-            font-size: 1.1rem;
-            max-width: 600px;
+        .grid-container {
+            max-width: 1100px;
             margin: 0 auto;
-        }
-
-        .grid {
+            padding: 0 20px 100px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 12px;
-            padding: 25px;
-            transition: all 0.3s ease;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.2) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 4px;
+            padding: 40px 30px;
+            transition: all 0.4s ease;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.4), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
         .card:hover {
-            transform: translateY(-5px);
-            border-color: #8b5cf6;
-            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2);
+            transform: translateY(-8px);
+            border-color: rgba(217, 119, 6, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
-        .card h2 {
-            color: #f3f4f6;
-            font-size: 1.4rem;
-            margin-bottom: 10px;
+        .card:hover::before {
+            opacity: 1;
         }
 
-        .card p {
-            color: #9ca3af;
-            font-size: 0.95rem;
-            line-height: 1.5;
+        .card-number {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: #d97706;
+            letter-spacing: 2px;
             margin-bottom: 20px;
         }
 
-        .btn {
-            display: inline-block;
-            text-align: center;
-            padding: 10px 20px;
-            background: linear-gradient(90deg, #2563eb, #7c3aed);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: opacity 0.2s;
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: #f1f5f9;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
         }
 
-        .btn:hover {
-            opacity: 0.9;
+        .card-desc {
+            font-size: 0.88rem;
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 12px 24px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .card-btn:hover {
+            background: #d97706;
+            color: #080a0f;
+            border-color: #d97706;
+            font-weight: 600;
         }
 
         footer {
-            margin-top: 60px;
-            color: #6b7280;
-            font-size: 0.9rem;
             text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #475569;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header-card">
-            <h1>Welcome to GitObs</h1>
-            <p class="subtitle">Digital world, fantasy sketches, concepts, and gaming portal.</p>
+    <nav>
+        <a href="#" class="logo">
+            <span class="logo-symbol">❖</span> GITOBS
+        </a>
+        <ul class="nav-links">
+            <li><a href="action.html">Action</a></li>
+            <li><a href="adventure.html">Fantasy</a></li>
+            <li><a href="strategy.html">Strategy</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <span class="hero-tag">Digital Fantasy Portal</span>
+        <h1 class="hero-title">CREATIVE<br>REALM</h1>
+        <p class="hero-subtitle">An elegant collection of digital artwork, fantasy concepts, gaming worlds, and visual imagination.</p>
+        <div class="divider"></div>
+    </section>
+
+    <h2 class="section-title">EXPLORE DISCIPLINE</h2>
+    <div class="grid-container">
+        
+        <div class="card">
+            <div>
+                <div class="card-number">01 / ACTION</div>
+                <h3 class="card-title">Action & Quest</h3>
+                <p class="card-desc">Dynamic concepts, high-paced narratives, and interactive adventure mechanics.</p>
+            </div>
+            <a href="action.html" class="card-btn">Explore ⟶</a>
         </div>
 
-        <div class="grid">
-            
-            <div class="card">
-                <div>
-                    <h2>Action & Adventure</h2>
-                    <p>Explore dynamic worlds, quests, and action concepts.</p>
-                </div>
-                <a href="action.html" class="btn">Explore</a>
+        <div class="card">
+            <div>
+                <div class="card-number">02 / ART</div>
+                <h3 class="card-title">Fantasy & Sketch</h3>
+                <p class="card-desc">Digital fantasy drawings, structural proportions, and imaginative renderings.</p>
             </div>
-
-            <div class="card">
-                <div>
-                    <h2>Fantasy & Art</h2>
-                    <p>Digital sketches, creative artwork, and imagination showcase.</p>
-                </div>
-                <a href="adventure.html" class="btn">Explore</a>
-            </div>
-
-            <div class="card">
-                <div>
-                    <h2>Casual & Strategy</h2>
-                    <p>Strategic mechanics, game design, and tactical ideas.</p>
-                </div>
-                <a href="strategy.html" class="btn">Explore</a>
-            </div>
-
+            <a href="adventure.html" class="card-btn">Explore ⟶</a>
         </div>
+
+        <div class="card">
+            <div>
+                <div class="card-number">03 / TACTICS</div>
+                <h3 class="card-title">Strategy & Logic</h3>
+                <p class="card-desc">Strategic game design, tactical structures, and deep mechanics showcase.</p>
+            </div>
+            <a href="strategy.html" class="card-btn">Explore ⟶</a>
+        </div>
+
     </div>
 
     <footer>
-        <p>© 2026 GitObs Portal. All rights reserved.</p>
+        © 2026 GITOBS PORTAL — ALL RIGHTS RESERVED
     </footer>
 
 </body>
