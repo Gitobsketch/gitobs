@@ -7,9 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    
-    <!-- Lottie Player JavaScript (3D ანიმაციებისთვის) -->
-    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 
     <style>
         * {
@@ -233,16 +231,21 @@
             text-transform: uppercase;
         }
 
-        /* 3D საყვარელი რობოტის ბლოკი ეკრანის კუთხეში */
-        .robot-pet {
+        .robot-wrapper {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 140px;
-            height: 140px;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
             z-index: 999;
             pointer-events: none;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
+            filter: drop-shadow(0 10px 25px rgba(217, 119, 6, 0.25));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
@@ -298,21 +301,23 @@
 
     </div>
 
-    <!-- 3D რობოტის ანიმაცია Loop-ზე -->
-    <div class="robot-pet">
-        <dotlottie-player 
-            src="https://lottie.host/8197c3be-065a-4712-a128-d3663a86ebf4/I4aA86q44w.json" 
-            background="transparent" 
-            speed="1" 
-            style="width: 100%; height: 100%;" 
-            loop 
-            autoplay>
-        </dotlottie-player>
-    </div>
+    <div id="robot-container" class="robot-wrapper"></div>
 
     <footer>
         © 2026 GITOBS PORTAL — ALL RIGHTS RESERVED
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lottie.loadAnimation({
+                container: document.getElementById('robot-container'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'https://raw.githubusercontent.com/lottie-react-native/lottie-react-native/master/docs/examples/assets/animations/Watermelon.json'
+            });
+        });
+    </script>
 
 </body>
 </html>
