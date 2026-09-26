@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 
     <style>
         * {
@@ -231,21 +230,60 @@
             text-transform: uppercase;
         }
 
-        .robot-wrapper {
+        /* Pure CSS 3D Animated Robot Companion */
+        .robot-companion {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 150px;
-            height: 150px;
+            bottom: 30px;
+            right: 30px;
+            width: 110px;
+            height: 110px;
             z-index: 999;
-            pointer-events: none;
-            filter: drop-shadow(0 10px 25px rgba(217, 119, 6, 0.25));
-            animation: float 3s ease-in-out infinite;
+            animation: floatBot 4s ease-in-out infinite;
+            filter: drop-shadow(0 15px 20px rgba(0,0,0,0.6));
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        @keyframes floatBot {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        .robot-svg .antenna-glow {
+            animation: pulseGlow 1.5s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { fill: #f59e0b; filter: drop-shadow(0 0 2px #f59e0b); }
+            to { fill: #38bdf8; filter: drop-shadow(0 0 10px #38bdf8); }
+        }
+
+        .robot-svg .eye {
+            animation: blinkEye 4s infinite;
+            transform-origin: center;
+        }
+
+        @keyframes blinkEye {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+
+        .robot-svg .hand-left {
+            animation: waveLeft 2s ease-in-out infinite alternate;
+            transform-origin: 30px 65px;
+        }
+
+        @keyframes waveLeft {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-20deg); }
+        }
+
+        .robot-svg .hand-right {
+            animation: waveRight 2s ease-in-out infinite alternate;
+            transform-origin: 90px 65px;
+        }
+
+        @keyframes waveRight {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(25deg); }
         }
     </style>
 </head>
@@ -301,23 +339,67 @@
 
     </div>
 
-    <div id="robot-container" class="robot-wrapper"></div>
+    <!-- Built-in Animated Robot -->
+    <div class="robot-companion">
+        <svg class="robot-svg" viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#334155"/>
+                    <stop offset="100%" stop-color="#0f172a"/>
+                </linearGradient>
+                <linearGradient id="headGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#475569"/>
+                    <stop offset="100%" stop-color="#1e293b"/>
+                </linearGradient>
+                <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#d97706"/>
+                    <stop offset="100%" stop-color="#f59e0b"/>
+                </linearGradient>
+            </defs>
+
+            <!-- Shadow -->
+            <ellipse cx="60" cy="112" rx="25" ry="5" fill="rgba(0,0,0,0.4)"/>
+
+            <!-- Antenna -->
+            <line x1="60" y1="28" x2="60" y2="14" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+            <circle class="antenna-glow" cx="60" cy="11" r="5" fill="#f59e0b"/>
+
+            <!-- Left Hand -->
+            <g class="hand-left">
+                <rect x="20" y="62" width="12" height="22" rx="6" fill="#475569"/>
+                <circle cx="26" cy="87" r="5" fill="#d97706"/>
+            </g>
+
+            <!-- Right Hand -->
+            <g class="hand-right">
+                <rect x="88" y="62" width="12" height="22" rx="6" fill="#475569"/>
+                <circle cx="94" cy="87" r="5" fill="#d97706"/>
+            </g>
+
+            <!-- Body -->
+            <rect x="34" y="58" width="52" height="42" rx="12" fill="url(#bodyGrad)" stroke="#64748b" stroke-width="2"/>
+            <!-- Core Light -->
+            <circle cx="60" cy="79" r="8" fill="url(#accentGrad)"/>
+            <circle cx="60" cy="79" r="4" fill="#fff" opacity="0.8"/>
+
+            <!-- Head -->
+            <rect x="30" y="26" width="60" height="36" rx="10" fill="url(#headGrad)" stroke="#64748b" stroke-width="2"/>
+            
+            <!-- Screen / Visor -->
+            <rect x="36" y="32" width="48" height="24" rx="6" fill="#020617"/>
+
+            <!-- Eyes -->
+            <circle class="eye" cx="48" cy="44" r="4" fill="#38bdf8"/>
+            <circle class="eye" cx="72" cy="44" r="4" fill="#38bdf8"/>
+
+            <!-- Thruster Light (Floating effect) -->
+            <polygon points="50,100 70,100 60,110" fill="#f59e0b" opacity="0.7"/>
+        </svg>
+    </div>
 
     <footer>
         © 2026 GITOBS PORTAL — ALL RIGHTS RESERVED
     </footer>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            lottie.loadAnimation({
-                container: document.getElementById('robot-container'),
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'https://raw.githubusercontent.com/lottie-react-native/lottie-react-native/master/docs/examples/assets/animations/Watermelon.json'
-            });
-        });
-    </script>
 
 </body>
 </html>
